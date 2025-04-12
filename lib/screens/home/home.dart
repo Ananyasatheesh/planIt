@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plan_it_app/blocs/task/task_bloc.dart';
+import 'package:plan_it_app/models/task_model.dart';
 import 'package:plan_it_app/screens/calendar/calendar.dart';
 import 'package:plan_it_app/screens/stats/stats.dart';
 import 'home_screen.dart';
@@ -33,7 +36,10 @@ class _HomeState extends State<Home> {
                     style: ButtonStyle(
                         backgroundColor: WidgetStateProperty.all(Colors.white)),
                     onPressed: () {
-                      // todo action for adding new task
+                      Navigator.pop(context);
+                      context.read<TaskBloc>().add(CreateNewTask(
+                          newTask: TaskModel(task: taskTitleController.text)));
+                      taskTitleController.clear();
                     },
                     child: Text("Set"))
               ],
